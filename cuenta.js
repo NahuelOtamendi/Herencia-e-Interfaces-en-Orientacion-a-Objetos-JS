@@ -5,6 +5,12 @@ export class Cuenta {
   #saldo;
 
   constructor(cliente, numero, agencia, saldo) {
+    //Se conviente en una clase abstracta, solo es posible extenderla y no instanciarla.
+    if (this.constructor == Cuenta) {
+      throw new Error(
+        "No se debe instanciar una clase padre, solo se debe extender a las clases hijos."
+      );
+    }
     this.#cliente = cliente;
     this.numero = numero;
     this.agencia = agencia;
@@ -22,17 +28,14 @@ export class Cuenta {
     return this.#cliente;
   }
 
-  prueba() {
-    console.log("Metodo padre");
-  }
-
   depositoEnCuenta(valor) {
     if (valor > 0) this.#saldo += valor;
     return this.#saldo;
   }
 
-  retirarDeCuenta(valor) {
-    _retirarDeCuenta(valor, 0);
+  retirarDeCuenta() {
+    //Se conviente en un metodo Abstracto
+    throw new Error("Debe implementarse este metodo en la clase hijo");
   }
 
   _retirarDeCuenta(valor, comision) {
