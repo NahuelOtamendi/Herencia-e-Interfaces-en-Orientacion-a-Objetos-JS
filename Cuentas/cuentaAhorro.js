@@ -8,4 +8,9 @@ export class CuentaAhorro extends Cuenta {
   retirarDeCuenta(valor) {
     super._retirarDeCuenta(valor, 2);
   }
+
+  transferirParaCuenta(valor, cuentaDestino) {
+    super._retirarDeCuenta(valor, 0);
+    cuentaDestino.depositoEnCuenta(valor);
+  }
 }

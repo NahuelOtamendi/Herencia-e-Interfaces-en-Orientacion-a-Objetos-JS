@@ -8,4 +8,9 @@ export class CuentaNomina extends Cuenta {
   retirarDeCuenta(valor) {
     super._retirarDeCuenta(valor, 1);
   }
+
+  transferirParaCuenta(valor, cuentaDestino) {
+    super._retirarDeCuenta(valor, 0);
+    cuentaDestino.depositoEnCuenta(valor);
+  }
 }

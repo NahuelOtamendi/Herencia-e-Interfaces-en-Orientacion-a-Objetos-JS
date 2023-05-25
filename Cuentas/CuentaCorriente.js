@@ -11,4 +11,9 @@ export class CuentaCorriente extends Cuenta {
   retirarDeCuenta(valor) {
     super._retirarDeCuenta(valor, 5);
   }
+
+  transferirParaCuenta(valor, cuentaDestino) {
+    super._retirarDeCuenta(valor, 0);
+    cuentaDestino.depositoEnCuenta(valor);
+  }
 }

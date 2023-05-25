@@ -4,11 +4,12 @@ export class Cuenta {
   #cliente;
   #saldo;
 
+  static cantidadCuentas = 0;
+
   constructor(cliente, numero, agencia, saldo) {
-    //Se conviente en una clase abstracta, solo es posible extenderla y no instanciarla.
-    if (this.constructor == Cuenta) {
+    if (new.target === Cuenta) {
       throw new Error(
-        "No se debe instanciar una clase padre, solo se debe extender a las clases hijos."
+        "No se debe instanciar una clase padre, solo se debe extender a las clases hijas."
       );
     }
     this.#cliente = cliente;
@@ -18,10 +19,10 @@ export class Cuenta {
     Cuenta.cantidadCuentas++;
   }
 
-  static cantidadCuentas = 0;
-
   set cliente(valor) {
-    if (valor instanceof Cliente) this.#cliente = valor;
+    if (valor instanceof Cliente) {
+      this.#cliente = valor;
+    }
   }
 
   get cliente() {
@@ -29,18 +30,19 @@ export class Cuenta {
   }
 
   depositoEnCuenta(valor) {
-    if (valor > 0) this.#saldo += valor;
+    if (valor > 0) {
+      this.#saldo += valor;
+    }
     return this.#saldo;
   }
 
   retirarDeCuenta() {
-    //Se conviente en un metodo Abstracto
-    throw new Error("Debe implementarse este metodo en la clase hijo");
+    throw new Error("Debe implementarse este método en la clase hija.");
   }
 
   _retirarDeCuenta(valor, comision) {
-    comision = valor * (comision / 100);
-    valor += comision;
+    const comisionValor = valor * (comision / 100);
+    valor += comisionValor;
 
     if (valor <= this.#saldo) {
       this.#saldo -= valor;
@@ -55,7 +57,5 @@ export class Cuenta {
   transferirParaCuenta(valor, cuentaDestino) {
     this.retirarDeCuenta(valor);
     cuentaDestino.depositoEnCuenta(valor);
-    valor = 200;
-    valor = valor * 1000;
   }
 }
