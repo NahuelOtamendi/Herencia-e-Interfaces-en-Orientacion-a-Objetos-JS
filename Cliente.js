@@ -16,7 +16,6 @@ export class Cliente {
   }
 
   asignarClave(clave) {
-    console.log("Cliente ~ asignarClave ~ clave:", clave);
     this.#clave = clave;
   }
 }
